@@ -12,5 +12,15 @@ describe('AST解析', () => {
       return item?.name === 'regions';
     });
     expect(regions?.type).toBe('array');
+
+    const isMale = res?.stores?.find((item) => {
+      return item?.name === 'isMale';
+    });
+    expect(isMale?.description).toBe('就是个男的');
+
+    const age = res?.stores?.find((item) => {
+      return item?.name === 'age';
+    });
+    expect(age?.description).toBe('两行的age 描述');
   })
 })

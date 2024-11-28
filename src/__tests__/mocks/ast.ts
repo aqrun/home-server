@@ -9,6 +9,7 @@ class GlobalModel {
    */
   name: string = 'alex';
   /**
+   * 两行的
    * age 描述
    */
   age: number = 18;

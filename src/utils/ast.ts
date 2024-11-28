@@ -63,7 +63,10 @@ export function parseClass(strData: string): ModelData {
       // 属性名
       const propertyName = (path?.node?.key as Identifier)?.name || '';
       // 注释
-      const comment = trimComment(path?.node?.leadingComments?.[0]?.value?.trim());
+      const commentValues = path?.node?.leadingComments?.map((item) => {
+        return item?.value?.trim();
+      })?.join('');
+      const comment = trimComment(commentValues);
       // 值
       let value = '';
       // 值类型
@@ -74,9 +77,15 @@ export function parseClass(strData: string): ModelData {
       //   console.log('name valueNode', propertyName, path?.node);
       // }
 
-      // if (propertyName === 'regions') {
-      //   console.log('valueNode', propertyName, path?.node);
-      // }
+      if (propertyName === 'age') {
+        // console.log('valueNode', propertyName, path?.node);
+        console.log('path?.node?.leadingComments--age', path?.node?.leadingComments);
+      }
+
+      if (propertyName === 'isMale') {
+        // console.log('valueNode', propertyName, path?.node);
+        console.log('path?.node?.leadingComments', path?.node?.leadingComments);
+      }
 
       if (isStringLiteral(valueNode)) {
         value = valueNode?.value;
@@ -107,7 +116,10 @@ export function parseClass(strData: string): ModelData {
     ClassMethod(path) {
       const isAsync = path?.node?.async ?? false;
       const name = (path?.node?.key as Identifier)?.name;
-      const comment = trimComment(path?.node?.leadingComments?.[0]?.value?.trim());
+      const commentValues = path?.node?.leadingComments?.map((item) => {
+        return item?.value?.trim();
+      })?.join('');
+      const comment = trimComment(commentValues);
       const body = parseFuncBodies(path?.node?.body);
 
       const actionData: ActionData = {
@@ -126,7 +138,7 @@ export function parseClass(strData: string): ModelData {
 
 function trimComment(comment?: string) {
   if (!comment) return '';
-  const res = comment?.replace(/\\n/g, '')
+  const res = comment?.replace(/\n\s*/g, '')
     .replace(/\*\s?/g, '')
     .trim();
   return res;
