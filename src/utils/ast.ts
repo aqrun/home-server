@@ -9,6 +9,7 @@ import {
   isObjectExpression,
   isBlockStatement,
   BlockStatement,
+  isArrayExpression,
 } from '@babel/types';
 
 export interface StoreData {
@@ -69,6 +70,14 @@ export function parseClass(strData: string): ModelData {
       let valueType = 'string';
       const valueNode = path?.node?.value;
 
+      // if (propertyName === 'name') {
+      //   console.log('name valueNode', propertyName, path?.node);
+      // }
+
+      // if (propertyName === 'regions') {
+      //   console.log('valueNode', propertyName, path?.node);
+      // }
+
       if (isStringLiteral(valueNode)) {
         value = valueNode?.value;
         valueType = 'string';
@@ -81,6 +90,9 @@ export function parseClass(strData: string): ModelData {
       } else if (isObjectExpression(valueNode)) {
         value = generate(valueNode)?.code || '';
         valueType = 'object';
+      } else if (isArrayExpression(valueNode)) {
+        value = generate(valueNode)?.code || '';
+        valueType = 'array';
       }
 
       const storeData: StoreData = {

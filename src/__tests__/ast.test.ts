@@ -7,5 +7,10 @@ describe('AST解析', () => {
     expect(res.id).toBe('GlobalModel');
     expect(res.description).toBe('test-class');
     expect(res.stores?.[0]?.initValue).toBe('alex');
+
+    const regions = res?.stores?.find((item) => {
+      return item?.name === 'regions';
+    });
+    expect(regions?.type).toBe('array');
   })
 })
