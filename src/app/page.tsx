@@ -8,6 +8,14 @@ export default function Home() {
 
         <div className={styles.ctas}>
           <a
+            href="http://192.168.31.243:9527"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.secondary}
+          >
+            PGAdmin(aqrun@sina.com:123456)
+          </a>
+          <a
             href="http://192.168.31.243:8096"
             target="_blank"
             rel="noopener noreferrer"
