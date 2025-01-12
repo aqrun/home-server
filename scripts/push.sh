@@ -1,3 +1,3 @@
 #! /bin/bash
 npm run build && \
-scp -r out/* aqrun@192.168.31.243:/home/aqrun/workspace/www/home-server
+scp -r out/* aqrun@192.168.1.240:/home/aqrun/workspace/www/home-server
